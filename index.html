@@ -1,0 +1,741 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>InvoiceHub — Generador de cotizaciones y facturas</title>
+    <link href="output.css" rel="stylesheet" />
+  </head>
+  <body class="m-0">
+    <main
+      class="flex min-h-dvh flex-col items-center gap-10 bg-slate-100 px-4 py-10 font-sans text-slate-800 sm:py-14"
+    >
+      <header class="w-full max-w-3xl text-center">
+        <p
+          class="mb-2 text-sm font-semibold uppercase tracking-[0.14em] text-teal-700"
+        >
+          Cotizaciones y facturas sin complicaciones
+        </p>
+        <h1
+          class="m-0 font-serif text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl"
+        >
+          InvoiceHub
+        </h1>
+        <p
+          class="mx-auto mt-4 max-w-xl text-base leading-relaxed text-slate-600"
+        >
+          Registra los datos del negocio, del cliente y los productos o
+          servicios. El sistema calcula los totales y genera el documento
+          automáticamente.
+        </p>
+      </header>
+
+      <form id="invoiceForm" class="w-full max-w-3xl" novalidate>
+        <!-- ================= 1. DATOS DEL NEGOCIO ================= -->
+        <section
+          class="mb-6 rounded-xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8"
+        >
+          <h2
+            class="mb-6 flex items-center gap-3 text-lg font-semibold text-slate-900"
+          >
+            <span
+              class="inline-flex size-7 items-center justify-center rounded-full bg-slate-900 text-sm font-bold text-white"
+              >1</span
+            >
+            Datos del negocio
+          </h2>
+
+          <div class="grid grid-cols-1 gap-x-6 gap-y-5 sm:grid-cols-2">
+            <div class="flex flex-col gap-1.5 sm:col-span-2">
+              <label
+                for="businessName"
+                class="text-sm font-medium text-slate-700"
+                >Nombre del negocio <span class="text-rose-600">*</span></label
+              >
+              <input
+                type="text"
+                id="businessName"
+                name="businessName"
+                placeholder="Soluciones Digitales SRL"
+                class="w-full rounded-md border border-slate-300 px-3.5 py-2.5 text-base transition-colors duration-150 placeholder:text-slate-400 focus:border-teal-600 focus:outline-none focus:ring-2 focus:ring-teal-600/20"
+              />
+              <p
+                class="error-message hidden text-sm text-rose-600"
+                data-error-for="businessName"
+              ></p>
+            </div>
+
+            <div class="flex flex-col gap-1.5">
+              <label for="businessId" class="text-sm font-medium text-slate-700"
+                >RNC o identificación
+                <span class="text-rose-600">*</span></label
+              >
+              <input
+                type="text"
+                id="businessId"
+                name="businessId"
+                inputmode="numeric"
+                placeholder="131123456"
+                class="w-full rounded-md border border-slate-300 px-3.5 py-2.5 text-base transition-colors duration-150 placeholder:text-slate-400 focus:border-teal-600 focus:outline-none focus:ring-2 focus:ring-teal-600/20"
+              />
+              <p
+                class="error-message hidden text-sm text-rose-600"
+                data-error-for="businessId"
+              ></p>
+            </div>
+
+            <div class="flex flex-col gap-1.5">
+              <label
+                for="businessPhone"
+                class="text-sm font-medium text-slate-700"
+                >Teléfono <span class="text-rose-600">*</span></label
+              >
+              <input
+                type="tel"
+                id="businessPhone"
+                name="businessPhone"
+                placeholder="809-555-1234"
+                class="w-full rounded-md border border-slate-300 px-3.5 py-2.5 text-base transition-colors duration-150 placeholder:text-slate-400 focus:border-teal-600 focus:outline-none focus:ring-2 focus:ring-teal-600/20"
+              />
+              <p
+                class="error-message hidden text-sm text-rose-600"
+                data-error-for="businessPhone"
+              ></p>
+            </div>
+
+            <div class="flex flex-col gap-1.5">
+              <label
+                for="businessEmail"
+                class="text-sm font-medium text-slate-700"
+                >Correo electrónico <span class="text-rose-600">*</span></label
+              >
+              <input
+                type="email"
+                id="businessEmail"
+                name="businessEmail"
+                placeholder="contacto@empresa.com"
+                class="w-full rounded-md border border-slate-300 px-3.5 py-2.5 text-base transition-colors duration-150 placeholder:text-slate-400 focus:border-teal-600 focus:outline-none focus:ring-2 focus:ring-teal-600/20"
+              />
+              <p
+                class="error-message hidden text-sm text-rose-600"
+                data-error-for="businessEmail"
+              ></p>
+            </div>
+
+            <div class="flex flex-col gap-1.5">
+              <label
+                for="businessLogo"
+                class="text-sm font-medium text-slate-700"
+                >URL del logo
+                <span class="text-slate-400">(opcional)</span></label
+              >
+              <input
+                type="url"
+                id="businessLogo"
+                name="businessLogo"
+                placeholder="https://ejemplo.com/logo.png"
+                class="w-full rounded-md border border-slate-300 px-3.5 py-2.5 text-base transition-colors duration-150 placeholder:text-slate-400 focus:border-teal-600 focus:outline-none focus:ring-2 focus:ring-teal-600/20"
+              />
+              <p
+                class="error-message hidden text-sm text-rose-600"
+                data-error-for="businessLogo"
+              ></p>
+            </div>
+
+            <div class="flex flex-col gap-1.5 sm:col-span-2">
+              <label
+                for="businessAddress"
+                class="text-sm font-medium text-slate-700"
+                >Dirección <span class="text-rose-600">*</span></label
+              >
+              <textarea
+                id="businessAddress"
+                name="businessAddress"
+                rows="2"
+                placeholder="Santo Domingo, República Dominicana"
+                class="w-full resize-y rounded-md border border-slate-300 px-3.5 py-2.5 text-base leading-relaxed transition-colors duration-150 placeholder:text-slate-400 focus:border-teal-600 focus:outline-none focus:ring-2 focus:ring-teal-600/20"
+              ></textarea>
+              <p
+                class="error-message hidden text-sm text-rose-600"
+                data-error-for="businessAddress"
+              ></p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ================= 2. DATOS DEL CLIENTE ================= -->
+        <section
+          class="mb-6 rounded-xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8"
+        >
+          <h2
+            class="mb-6 flex items-center gap-3 text-lg font-semibold text-slate-900"
+          >
+            <span
+              class="inline-flex size-7 items-center justify-center rounded-full bg-slate-900 text-sm font-bold text-white"
+              >2</span
+            >
+            Datos del cliente
+          </h2>
+
+          <div class="grid grid-cols-1 gap-x-6 gap-y-5 sm:grid-cols-2">
+            <div class="flex flex-col gap-1.5 sm:col-span-2">
+              <label for="clientName" class="text-sm font-medium text-slate-700"
+                >Nombre del cliente <span class="text-rose-600">*</span></label
+              >
+              <input
+                type="text"
+                id="clientName"
+                name="clientName"
+                placeholder="Juan Pérez"
+                class="w-full rounded-md border border-slate-300 px-3.5 py-2.5 text-base transition-colors duration-150 placeholder:text-slate-400 focus:border-teal-600 focus:outline-none focus:ring-2 focus:ring-teal-600/20"
+              />
+              <p
+                class="error-message hidden text-sm text-rose-600"
+                data-error-for="clientName"
+              ></p>
+            </div>
+
+            <div class="flex flex-col gap-1.5">
+              <label for="clientId" class="text-sm font-medium text-slate-700"
+                >Identificación o RNC
+                <span class="text-rose-600">*</span></label
+              >
+              <input
+                type="text"
+                id="clientId"
+                name="clientId"
+                inputmode="numeric"
+                placeholder="00112345678"
+                class="w-full rounded-md border border-slate-300 px-3.5 py-2.5 text-base transition-colors duration-150 placeholder:text-slate-400 focus:border-teal-600 focus:outline-none focus:ring-2 focus:ring-teal-600/20"
+              />
+              <p
+                class="error-message hidden text-sm text-rose-600"
+                data-error-for="clientId"
+              ></p>
+            </div>
+
+            <div class="flex flex-col gap-1.5">
+              <label
+                for="clientPhone"
+                class="text-sm font-medium text-slate-700"
+                >Teléfono <span class="text-rose-600">*</span></label
+              >
+              <input
+                type="tel"
+                id="clientPhone"
+                name="clientPhone"
+                placeholder="829-555-9876"
+                class="w-full rounded-md border border-slate-300 px-3.5 py-2.5 text-base transition-colors duration-150 placeholder:text-slate-400 focus:border-teal-600 focus:outline-none focus:ring-2 focus:ring-teal-600/20"
+              />
+              <p
+                class="error-message hidden text-sm text-rose-600"
+                data-error-for="clientPhone"
+              ></p>
+            </div>
+
+            <div class="flex flex-col gap-1.5">
+              <label
+                for="clientEmail"
+                class="text-sm font-medium text-slate-700"
+                >Correo electrónico <span class="text-rose-600">*</span></label
+              >
+              <input
+                type="email"
+                id="clientEmail"
+                name="clientEmail"
+                placeholder="juan@correo.com"
+                class="w-full rounded-md border border-slate-300 px-3.5 py-2.5 text-base transition-colors duration-150 placeholder:text-slate-400 focus:border-teal-600 focus:outline-none focus:ring-2 focus:ring-teal-600/20"
+              />
+              <p
+                class="error-message hidden text-sm text-rose-600"
+                data-error-for="clientEmail"
+              ></p>
+            </div>
+
+            <div class="flex flex-col gap-1.5">
+              <label
+                for="clientAddress"
+                class="text-sm font-medium text-slate-700"
+                >Dirección <span class="text-rose-600">*</span></label
+              >
+              <input
+                type="text"
+                id="clientAddress"
+                name="clientAddress"
+                placeholder="Av. Principal #25, Santiago"
+                class="w-full rounded-md border border-slate-300 px-3.5 py-2.5 text-base transition-colors duration-150 placeholder:text-slate-400 focus:border-teal-600 focus:outline-none focus:ring-2 focus:ring-teal-600/20"
+              />
+              <p
+                class="error-message hidden text-sm text-rose-600"
+                data-error-for="clientAddress"
+              ></p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============ 3. DATOS GENERALES DEL DOCUMENTO ============ -->
+        <section
+          class="mb-6 rounded-xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8"
+        >
+          <h2
+            class="mb-6 flex items-center gap-3 text-lg font-semibold text-slate-900"
+          >
+            <span
+              class="inline-flex size-7 items-center justify-center rounded-full bg-slate-900 text-sm font-bold text-white"
+              >3</span
+            >
+            Datos generales de la cotización o factura
+          </h2>
+
+          <div class="grid grid-cols-1 gap-x-6 gap-y-5 sm:grid-cols-2">
+            <div class="flex flex-col gap-1.5">
+              <label for="docType" class="text-sm font-medium text-slate-700"
+                >Tipo de documento <span class="text-rose-600">*</span></label
+              >
+              <select
+                id="docType"
+                name="docType"
+                class="w-full rounded-md border border-slate-300 bg-white px-3.5 py-2.5 text-base focus:border-teal-600 focus:outline-none focus:ring-2 focus:ring-teal-600/20"
+              >
+                <option value="Cotización">Cotización</option>
+                <option value="Factura">Factura</option>
+              </select>
+              <p
+                class="error-message hidden text-sm text-rose-600"
+                data-error-for="docType"
+              ></p>
+            </div>
+
+            <div class="flex flex-col gap-1.5">
+              <label for="docNumber" class="text-sm font-medium text-slate-700"
+                >Número de documento <span class="text-rose-600">*</span></label
+              >
+              <input
+                type="text"
+                id="docNumber"
+                name="docNumber"
+                placeholder="COT-0001"
+                class="w-full rounded-md border border-slate-300 px-3.5 py-2.5 text-base transition-colors duration-150 placeholder:text-slate-400 focus:border-teal-600 focus:outline-none focus:ring-2 focus:ring-teal-600/20"
+              />
+              <p
+                class="error-message hidden text-sm text-rose-600"
+                data-error-for="docNumber"
+              ></p>
+            </div>
+
+            <div class="flex flex-col gap-1.5">
+              <label for="issueDate" class="text-sm font-medium text-slate-700"
+                >Fecha de emisión <span class="text-rose-600">*</span></label
+              >
+              <input
+                type="date"
+                id="issueDate"
+                name="issueDate"
+                class="w-full rounded-md border border-slate-300 px-3.5 py-2.5 text-base focus:border-teal-600 focus:outline-none focus:ring-2 focus:ring-teal-600/20"
+              />
+              <p
+                class="error-message hidden text-sm text-rose-600"
+                data-error-for="issueDate"
+              ></p>
+            </div>
+
+            <div class="flex flex-col gap-1.5">
+              <label for="dueDate" class="text-sm font-medium text-slate-700"
+                >Fecha de vencimiento
+                <span class="text-rose-600">*</span></label
+              >
+              <input
+                type="date"
+                id="dueDate"
+                name="dueDate"
+                class="w-full rounded-md border border-slate-300 px-3.5 py-2.5 text-base focus:border-teal-600 focus:outline-none focus:ring-2 focus:ring-teal-600/20"
+              />
+              <p
+                class="error-message hidden text-sm text-rose-600"
+                data-error-for="dueDate"
+              ></p>
+            </div>
+
+            <div class="flex flex-col gap-1.5">
+              <label for="docStatus" class="text-sm font-medium text-slate-700"
+                >Estado <span class="text-rose-600">*</span></label
+              >
+              <select
+                id="docStatus"
+                name="docStatus"
+                class="w-full rounded-md border border-slate-300 bg-white px-3.5 py-2.5 text-base focus:border-teal-600 focus:outline-none focus:ring-2 focus:ring-teal-600/20"
+              >
+                <option value="Pendiente">Pendiente</option>
+                <option value="Aprobada">Aprobada</option>
+                <option value="Rechazada">Rechazada</option>
+              </select>
+              <p
+                class="error-message hidden text-sm text-rose-600"
+                data-error-for="docStatus"
+              ></p>
+            </div>
+
+            <div class="flex flex-col gap-1.5">
+              <label for="currency" class="text-sm font-medium text-slate-700"
+                >Moneda <span class="text-rose-600">*</span></label
+              >
+              <select
+                id="currency"
+                name="currency"
+                class="w-full rounded-md border border-slate-300 bg-white px-3.5 py-2.5 text-base focus:border-teal-600 focus:outline-none focus:ring-2 focus:ring-teal-600/20"
+              >
+                <option value="DOP">DOP</option>
+                <option value="USD">USD</option>
+                <option value="EUR">EUR</option>
+              </select>
+              <p
+                class="error-message hidden text-sm text-rose-600"
+                data-error-for="currency"
+              ></p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ================= 4. PRODUCTOS O SERVICIOS ================= -->
+        <section
+          class="mb-6 rounded-xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8"
+        >
+          <h2
+            class="mb-6 flex items-center gap-3 text-lg font-semibold text-slate-900"
+          >
+            <span
+              class="inline-flex size-7 items-center justify-center rounded-full bg-slate-900 text-sm font-bold text-white"
+              >4</span
+            >
+            Productos o servicios
+          </h2>
+
+          <div
+            class="mb-3 grid grid-cols-[1fr_5rem_7rem_6rem_7rem_auto] gap-3 pr-1 text-xs font-semibold uppercase tracking-wide text-slate-500 max-lg:hidden"
+          >
+            <span>Descripción</span>
+            <span>Cantidad</span>
+            <span>Precio unit.</span>
+            <span>Desc. %</span>
+            <span>Subtotal</span>
+            <span class="sr-only">Acciones</span>
+          </div>
+
+          <div id="productRows" class="flex flex-col gap-3">
+            <!-- Fila inicial de producto o servicio (estructura de referencia).
+                 Esta fila la puede crear JavaScript con createElement; se deja
+                 aquí para que el formulario sea usable sin JS. -->
+            <div
+              class="product-row grid grid-cols-1 gap-3 rounded-lg border border-slate-200 bg-slate-50 p-3 lg:grid-cols-[1fr_5rem_7rem_6rem_7rem_auto] lg:items-center"
+            >
+              <label class="flex flex-col gap-1 lg:contents">
+                <span class="text-xs font-medium text-slate-500 lg:hidden"
+                  >Descripción</span
+                >
+                <input
+                  type="text"
+                  name="productDescription"
+                  placeholder="Diseño de sitio web"
+                  class="product-description w-full rounded-md border border-slate-300 px-3 py-2 text-sm placeholder:text-slate-400 focus:border-teal-600 focus:outline-none focus:ring-2 focus:ring-teal-600/20"
+                />
+              </label>
+              <label class="flex flex-col gap-1 lg:contents">
+                <span class="text-xs font-medium text-slate-500 lg:hidden"
+                  >Cantidad</span
+                >
+                <input
+                  type="number"
+                  name="productQuantity"
+                  min="1"
+                  step="1"
+                  placeholder="1"
+                  class="product-quantity w-full rounded-md border border-slate-300 px-3 py-2 text-sm placeholder:text-slate-400 focus:border-teal-600 focus:outline-none focus:ring-2 focus:ring-teal-600/20"
+                />
+              </label>
+              <label class="flex flex-col gap-1 lg:contents">
+                <span class="text-xs font-medium text-slate-500 lg:hidden"
+                  >Precio unitario</span
+                >
+                <input
+                  type="number"
+                  name="productPrice"
+                  min="0"
+                  step="0.01"
+                  placeholder="0.00"
+                  class="product-price w-full rounded-md border border-slate-300 px-3 py-2 text-sm placeholder:text-slate-400 focus:border-teal-600 focus:outline-none focus:ring-2 focus:ring-teal-600/20"
+                />
+              </label>
+              <label class="flex flex-col gap-1 lg:contents">
+                <span class="text-xs font-medium text-slate-500 lg:hidden"
+                  >Descuento %</span
+                >
+                <input
+                  type="number"
+                  name="productDiscount"
+                  min="0"
+                  max="100"
+                  step="0.01"
+                  placeholder="0"
+                  class="product-discount w-full rounded-md border border-slate-300 px-3 py-2 text-sm placeholder:text-slate-400 focus:border-teal-600 focus:outline-none focus:ring-2 focus:ring-teal-600/20"
+                />
+              </label>
+              <label class="flex flex-col gap-1 lg:contents">
+                <span class="text-xs font-medium text-slate-500 lg:hidden"
+                  >Subtotal</span
+                >
+                <output
+                  class="product-subtotal block rounded-md bg-slate-200/60 px-3 py-2 text-right text-sm font-medium tabular-nums text-slate-700"
+                  >0.00</output
+                >
+              </label>
+              <div class="flex justify-end lg:contents">
+                <button
+                  type="button"
+                  class="remove-product rounded-md border border-rose-200 px-3 py-2 text-sm font-medium text-rose-600 transition-colors hover:bg-rose-50 focus:outline-none focus:ring-2 focus:ring-rose-500/30"
+                >
+                  Eliminar
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <p
+            id="productError"
+            class="error-message mt-3 hidden text-sm text-rose-600"
+          ></p>
+
+          <button
+            type="button"
+            id="addProduct"
+            class="mt-4 rounded-md border border-teal-600 px-4 py-2 text-sm font-semibold text-teal-700 transition-colors hover:bg-teal-50 focus:outline-none focus:ring-2 focus:ring-teal-600/30"
+          >
+            + Agregar producto o servicio
+          </button>
+        </section>
+
+        <!-- ========== 5. IMPUESTOS Y DESCUENTOS GENERALES ========== -->
+        <section
+          class="mb-6 rounded-xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8"
+        >
+          <h2
+            class="mb-6 flex items-center gap-3 text-lg font-semibold text-slate-900"
+          >
+            <span
+              class="inline-flex size-7 items-center justify-center rounded-full bg-slate-900 text-sm font-bold text-white"
+              >5</span
+            >
+            Configuración de impuestos y descuentos
+          </h2>
+
+          <div class="grid grid-cols-1 gap-x-6 gap-y-5 sm:grid-cols-3">
+            <div class="flex flex-col gap-1.5">
+              <label
+                class="flex items-center gap-2 text-sm font-medium text-slate-700"
+              >
+                <input
+                  type="checkbox"
+                  id="applyTax"
+                  name="applyTax"
+                  class="size-4 rounded border-slate-300 text-teal-600 focus:ring-2 focus:ring-teal-600/30"
+                />
+                Aplicar impuesto
+              </label>
+            </div>
+
+            <div class="flex flex-col gap-1.5">
+              <label for="taxRate" class="text-sm font-medium text-slate-700"
+                >Porcentaje de impuesto (%)</label
+              >
+              <input
+                type="number"
+                id="taxRate"
+                name="taxRate"
+                min="0"
+                max="100"
+                step="0.01"
+                placeholder="18"
+                disabled
+                class="w-full rounded-md border border-slate-300 px-3.5 py-2.5 text-base placeholder:text-slate-400 disabled:cursor-not-allowed disabled:bg-slate-100 disabled:text-slate-400 focus:border-teal-600 focus:outline-none focus:ring-2 focus:ring-teal-600/20"
+              />
+              <p
+                class="error-message hidden text-sm text-rose-600"
+                data-error-for="taxRate"
+              ></p>
+            </div>
+
+            <div class="flex flex-col gap-1.5">
+              <label
+                for="globalDiscount"
+                class="text-sm font-medium text-slate-700"
+                >Descuento general (%)</label
+              >
+              <input
+                type="number"
+                id="globalDiscount"
+                name="globalDiscount"
+                min="0"
+                max="100"
+                step="0.01"
+                placeholder="0"
+                class="w-full rounded-md border border-slate-300 px-3.5 py-2.5 text-base placeholder:text-slate-400 focus:border-teal-600 focus:outline-none focus:ring-2 focus:ring-teal-600/20"
+              />
+              <p
+                class="error-message hidden text-sm text-rose-600"
+                data-error-for="globalDiscount"
+              ></p>
+            </div>
+
+            <div class="flex flex-col gap-1.5 sm:col-span-3">
+              <label
+                for="discountApplication"
+                class="text-sm font-medium text-slate-700"
+                >Aplicación del descuento
+                <span class="text-rose-600">*</span></label
+              >
+              <select
+                id="discountApplication"
+                name="discountApplication"
+                class="w-full rounded-md border border-slate-300 bg-white px-3.5 py-2.5 text-base focus:border-teal-600 focus:outline-none focus:ring-2 focus:ring-teal-600/20"
+              >
+                <option value="before">
+                  Aplicar descuento antes del impuesto
+                </option>
+                <option value="after">
+                  Aplicar descuento después del impuesto
+                </option>
+              </select>
+              <p
+                class="error-message hidden text-sm text-rose-600"
+                data-error-for="discountApplication"
+              ></p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ================= 6. RESUMEN DE CÁLCULOS ================= -->
+        <section
+          class="mb-6 rounded-xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8"
+        >
+          <h2
+            class="mb-6 flex items-center gap-3 text-lg font-semibold text-slate-900"
+          >
+            <span
+              class="inline-flex size-7 items-center justify-center rounded-full bg-slate-900 text-sm font-bold text-white"
+              >6</span
+            >
+            Resumen de cálculos
+          </h2>
+
+          <dl class="flex flex-col divide-y divide-slate-100 text-sm">
+            <div class="flex items-center justify-between py-2.5">
+              <dt class="text-slate-600">Cantidad de productos o servicios</dt>
+              <dd
+                id="summaryCount"
+                class="font-medium tabular-nums text-slate-900"
+              >
+                0
+              </dd>
+            </div>
+            <div class="flex items-center justify-between py-2.5">
+              <dt class="text-slate-600">Subtotal bruto</dt>
+              <dd
+                id="summaryGross"
+                class="font-medium tabular-nums text-slate-900"
+              >
+                DOP 0.00
+              </dd>
+            </div>
+            <div class="flex items-center justify-between py-2.5">
+              <dt class="text-slate-600">Descuento por productos</dt>
+              <dd
+                id="summaryProductDiscount"
+                class="font-medium tabular-nums text-slate-900"
+              >
+                DOP 0.00
+              </dd>
+            </div>
+            <div class="flex items-center justify-between py-2.5">
+              <dt class="text-slate-600">
+                Subtotal después de descuentos individuales
+              </dt>
+              <dd
+                id="summaryNet"
+                class="font-medium tabular-nums text-slate-900"
+              >
+                DOP 0.00
+              </dd>
+            </div>
+            <div class="flex items-center justify-between py-2.5">
+              <dt class="text-slate-600">Descuento general</dt>
+              <dd
+                id="summaryGlobalDiscount"
+                class="font-medium tabular-nums text-slate-900"
+              >
+                DOP 0.00
+              </dd>
+            </div>
+            <div class="flex items-center justify-between py-2.5">
+              <dt class="text-slate-600">Impuesto</dt>
+              <dd
+                id="summaryTax"
+                class="font-medium tabular-nums text-slate-900"
+              >
+                DOP 0.00
+              </dd>
+            </div>
+            <div
+              class="flex items-center justify-between border-t-2 border-slate-200 py-3 text-base"
+            >
+              <dt class="font-semibold text-slate-900">Total final</dt>
+              <dd
+                id="summaryTotal"
+                class="text-lg font-bold tabular-nums text-teal-700"
+              >
+                DOP 0.00
+              </dd>
+            </div>
+          </dl>
+        </section>
+
+        <div class="flex justify-end">
+          <button
+            type="submit"
+            id="generateDocument"
+            class="rounded-lg bg-slate-900 px-7 py-3 text-base font-semibold text-white transition-colors hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-teal-600/40 active:translate-y-px"
+          >
+            Generar documento
+          </button>
+        </div>
+      </form>
+
+      <!-- ================= DOCUMENTO GENERADO ================= -->
+      <section id="generatedSection" class="w-full max-w-3xl" hidden>
+        <h2 class="mb-4 text-center text-2xl font-bold text-slate-900">
+          Documento generado
+        </h2>
+        <article
+          id="generatedDocument"
+          class="rounded-xl border border-slate-200 bg-white p-6 shadow-md sm:p-10"
+        >
+          <!-- JavaScript construye aquí el documento con createElement / appendChild -->
+        </article>
+        <div class="mt-4 flex justify-center print-hidden">
+          <button
+            type="button"
+            id="printDocument"
+            class="rounded-lg border border-slate-300 bg-white px-6 py-2.5 text-sm font-semibold text-slate-700 transition-colors hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-slate-400/40"
+          >
+            Imprimir / Guardar como PDF
+          </button>
+        </div>
+      </section>
+    </main>
+
+    <script src="scripts/utils.js"></script>
+    <script src="scripts/products.js"></script>
+    <script src="scripts/calculations.js"></script>
+    <script src="scripts/validations.js"></script>
+    <script src="scripts/document.js"></script>
+    <script src="scripts/main.js"></script>
+  </body>
+</html>
