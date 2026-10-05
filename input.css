@@ -1,0 +1,48 @@
+@import "tailwindcss";
+
+@theme {
+  --font-serif: ui-serif, Georgia, "Times New Roman", serif;
+}
+
+@utility error-message {
+  color: var(--color-rose-600);
+  font-size: var(--text-sm);
+  line-height: var(--text-sm--line-height);
+}
+
+@utility print-hidden {
+  @media print {
+    display: none !important;
+  }
+}
+
+@media print {
+  body {
+    background: #fff;
+  }
+
+  body main {
+    display: block;
+    padding: 0;
+    gap: 0;
+  }
+
+  header,
+  #invoiceForm,
+  .print-hidden {
+    display: none !important;
+  }
+
+  #generatedSection,
+  #generatedDocument {
+    max-width: 100%;
+    margin: 0;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  #generatedSection h2 {
+    display: none;
+  }
+}
