@@ -209,6 +209,9 @@
   }
 }
 @layer utilities {
+  .visible {
+    visibility: visible;
+  }
   .sr-only {
     position: absolute;
     width: 1px;
@@ -219,6 +222,9 @@
     clip-path: inset(50%);
     white-space: nowrap;
     border-width: 0;
+  }
+  .static {
+    position: static;
   }
   .m-0 {
     margin: 0px;
@@ -309,8 +315,8 @@
   .grid-cols-1 {
     grid-template-columns: repeat(1, minmax(0, 1fr));
   }
-  .grid-cols-\[1fr_5rem_7rem_6rem_7rem_auto\] {
-    grid-template-columns: 1fr 5rem 7rem 6rem 7rem auto;
+  .grid-cols-\[1fr_5rem_7rem_6rem_8rem_auto\] {
+    grid-template-columns: 1fr 5rem 7rem 6rem 8rem auto;
   }
   .grid-cols-\[auto_1fr\] {
     grid-template-columns: auto 1fr;
@@ -721,17 +727,14 @@
     }
   }
   @media (width >= 64rem) {
-    .lg\:contents {
-      display: contents;
-    }
     .lg\:hidden {
       display: none;
     }
-    .lg\:grid-cols-\[1fr_5rem_7rem_6rem_7rem_auto\] {
-      grid-template-columns: 1fr 5rem 7rem 6rem 7rem auto;
+    .lg\:grid-cols-\[1fr_5rem_7rem_6rem_8rem_auto\] {
+      grid-template-columns: 1fr 5rem 7rem 6rem 8rem auto;
     }
-    .lg\:items-center {
-      align-items: center;
+    .lg\:items-start {
+      align-items: flex-start;
     }
   }
 }

@@ -411,7 +411,7 @@
           </h2>
 
           <div
-            class="mb-3 grid grid-cols-[1fr_5rem_7rem_6rem_7rem_auto] gap-3 pr-1 text-xs font-semibold uppercase tracking-wide text-slate-500 max-lg:hidden"
+            class="mb-3 grid grid-cols-[1fr_5rem_7rem_6rem_8rem_auto] gap-3 pr-1 text-xs font-semibold uppercase tracking-wide text-slate-500 max-lg:hidden"
           >
             <span>Descripción</span>
             <span>Cantidad</span>
@@ -426,69 +426,77 @@
                  Esta fila la puede crear JavaScript con createElement; se deja
                  aquí para que el formulario sea usable sin JS. -->
             <div
-              class="product-row grid grid-cols-1 gap-3 rounded-lg border border-slate-200 bg-slate-50 p-3 lg:grid-cols-[1fr_5rem_7rem_6rem_7rem_auto] lg:items-center"
+              class="product-row grid grid-cols-1 gap-3 rounded-lg border border-slate-200 bg-slate-50 p-3 lg:grid-cols-[1fr_5rem_7rem_6rem_8rem_auto] lg:items-start"
             >
-              <label class="flex flex-col gap-1 lg:contents">
+              <label class="flex flex-col gap-1">
                 <span class="text-xs font-medium text-slate-500 lg:hidden"
                   >Descripción</span
                 >
                 <input
                   type="text"
                   name="productDescription"
+                  data-field="description"
                   placeholder="Diseño de sitio web"
                   class="product-description w-full rounded-md border border-slate-300 px-3 py-2 text-sm placeholder:text-slate-400 focus:border-teal-600 focus:outline-none focus:ring-2 focus:ring-teal-600/20"
                 />
+                <p class="error-message hidden" data-row-error="description"></p>
               </label>
-              <label class="flex flex-col gap-1 lg:contents">
+              <label class="flex flex-col gap-1">
                 <span class="text-xs font-medium text-slate-500 lg:hidden"
                   >Cantidad</span
                 >
                 <input
                   type="number"
                   name="productQuantity"
+                  data-field="quantity"
                   min="1"
                   step="1"
                   placeholder="1"
                   class="product-quantity w-full rounded-md border border-slate-300 px-3 py-2 text-sm placeholder:text-slate-400 focus:border-teal-600 focus:outline-none focus:ring-2 focus:ring-teal-600/20"
                 />
+                <p class="error-message hidden" data-row-error="quantity"></p>
               </label>
-              <label class="flex flex-col gap-1 lg:contents">
+              <label class="flex flex-col gap-1">
                 <span class="text-xs font-medium text-slate-500 lg:hidden"
                   >Precio unitario</span
                 >
                 <input
                   type="number"
                   name="productPrice"
+                  data-field="price"
                   min="0"
                   step="0.01"
                   placeholder="0.00"
                   class="product-price w-full rounded-md border border-slate-300 px-3 py-2 text-sm placeholder:text-slate-400 focus:border-teal-600 focus:outline-none focus:ring-2 focus:ring-teal-600/20"
                 />
+                <p class="error-message hidden" data-row-error="price"></p>
               </label>
-              <label class="flex flex-col gap-1 lg:contents">
+              <label class="flex flex-col gap-1">
                 <span class="text-xs font-medium text-slate-500 lg:hidden"
                   >Descuento %</span
                 >
                 <input
                   type="number"
                   name="productDiscount"
+                  data-field="discount"
                   min="0"
                   max="100"
                   step="0.01"
                   placeholder="0"
                   class="product-discount w-full rounded-md border border-slate-300 px-3 py-2 text-sm placeholder:text-slate-400 focus:border-teal-600 focus:outline-none focus:ring-2 focus:ring-teal-600/20"
                 />
+                <p class="error-message hidden" data-row-error="discount"></p>
               </label>
-              <label class="flex flex-col gap-1 lg:contents">
+              <label class="flex flex-col gap-1">
                 <span class="text-xs font-medium text-slate-500 lg:hidden"
                   >Subtotal</span
                 >
                 <output
                   class="product-subtotal block rounded-md bg-slate-200/60 px-3 py-2 text-right text-sm font-medium tabular-nums text-slate-700"
-                  >0.00</output
+                  >DOP 0.00</output
                 >
               </label>
-              <div class="flex justify-end lg:contents">
+              <div class="flex justify-end">
                 <button
                   type="button"
                   class="remove-product rounded-md border border-rose-200 px-3 py-2 text-sm font-medium text-rose-600 transition-colors hover:bg-rose-50 focus:outline-none focus:ring-2 focus:ring-rose-500/30"

@@ -62,15 +62,7 @@ function bindEvents() {
   });
   taxRate.addEventListener("input", updateSummary);
 
-  productRows.querySelectorAll(".product-row").forEach((row) => {
-    row.querySelectorAll("input").forEach((input) => {
-      input.addEventListener("input", () => {
-        updateRowSubtotal(row);
-        updateSummary();
-      });
-    });
-    row.querySelector(".remove-product").addEventListener("click", () => removeRow(row));
-  });
+  productRows.querySelectorAll(".product-row").forEach(bindProductRow);
 
   form.addEventListener("input", (event) => {
     if (event.target.id) clearError(event.target.id);

@@ -22,10 +22,22 @@ function validateEmail(fieldId) {
   return true;
 }
 
+function setRowError(row, field, message) {
+  const el = row.querySelector(`[data-row-error="${field}"]`);
+  if (!el) return;
+  el.textContent = message;
+  el.classList.toggle("hidden", !message);
+}
+
+function clearRowError(input) {
+  const field = input.dataset.field;
+  if (!field) return;
+  setRowError(input.closest(".product-row"), field, "");
+}
+
 function validateProducts() {
   const rows = productRows.querySelectorAll(".product-row");
   let validCount = 0;
-  let firstError = null;
 
   rows.forEach((row) => {
     const { description, quantity, price, discount } = getRowInputs(row);
@@ -34,29 +46,21 @@ function validateProducts() {
     const disc = toNumber(discount);
     let rowValid = true;
 
-    if (!description) {
-      if (firstError === null) firstError = "Debe agregar al menos un producto o servicio válido.";
-      rowValid = false;
-    }
-    if (!Number.isInteger(qty) || qty <= 0) {
-      if (firstError === null)
-        firstError =
-          "La cantidad debe ser un número entero mayor que cero. No se permiten cantidades decimales.";
-      rowValid = false;
-    }
-    if (unit <= 0) {
-      if (firstError === null) firstError = "El precio unitario debe ser mayor que cero.";
-      rowValid = false;
-    }
-    if (disc < 0 || disc > 100) {
-      if (firstError === null) firstError = "El descuento individual debe estar entre 0 y 100.";
-      rowValid = false;
-    }
+    [
+      ["description", !description, "Este campo es obligatorio."],
+      ["quantity", !Number.isInteger(qty) || qty <= 0, "Debe ser un número entero mayor que cero."],
+      ["price", unit <= 0, "Debe ser mayor que cero."],
+      ["discount", disc < 0 || disc > 100, "Debe estar entre 0 y 100."],
+    ].forEach(([field, invalid, message]) => {
+      setRowError(row, field, invalid ? message : "");
+      if (invalid) rowValid = false;
+    });
+
     if (rowValid) validCount += 1;
   });
 
   if (validCount === 0) {
-    productError.textContent = firstError || "Debe agregar al menos un producto o servicio válido.";
+    productError.textContent = "Debe agregar al menos un producto o servicio válido.";
     productError.classList.remove("hidden");
     return false;
   }
@@ -123,6 +127,12 @@ function validateForm() {
   const globalDisc = toNumber(document.getElementById("globalDiscount").value);
   if (globalDisc < 0 || globalDisc > 100) {
     setError("globalDiscount", "El descuento general debe estar entre 0 y 100.");
+    valid = false;
+  }
+
+  const discountApp = document.getElementById("discountApplication").value;
+  if (discountApp !== "before" && discountApp !== "after") {
+    setError("discountApplication", "Debe seleccionar la aplicación del descuento.");
     valid = false;
   }
 

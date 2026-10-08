@@ -12,7 +12,7 @@ function updateRowSubtotal(row) {
   const discAmount = (gross * disc) / 100;
   const subtotal = gross - discAmount;
 
-  subtotalEl.textContent = CURRENCY_FORMAT.format(Math.max(0, subtotal));
+  subtotalEl.textContent = formatMoney(Math.max(0, subtotal));
 }
 
 function calculateTotals() {

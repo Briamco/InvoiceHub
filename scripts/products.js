@@ -2,6 +2,18 @@
    products.js — Filas de productos o servicios (crear, agregar, eliminar).
    ========================================================================= */
 
+function bindProductRow(row) {
+  row.querySelectorAll("input").forEach((input) => {
+    input.addEventListener("input", () => {
+      clearRowError(input);
+      updateRowSubtotal(row);
+      updateSummary();
+    });
+  });
+  row.querySelector(".remove-product").addEventListener("click", () => removeRow(row));
+  updateRowSubtotal(row);
+}
+
 function createProductRow() {
   const template = document.querySelector(".product-row");
   const row = template.cloneNode(true);
@@ -9,16 +21,12 @@ function createProductRow() {
   row.querySelectorAll("input").forEach((input) => {
     input.value = "";
   });
-  row.querySelector(".product-subtotal").textContent = "0.00";
-
-  row.querySelectorAll("input").forEach((input) => {
-    input.addEventListener("input", () => {
-      updateRowSubtotal(row);
-      updateSummary();
-    });
+  row.querySelectorAll("[data-row-error]").forEach((el) => {
+    el.textContent = "";
+    el.classList.add("hidden");
   });
-  row.querySelector(".remove-product").addEventListener("click", () => removeRow(row));
 
+  bindProductRow(row);
   return row;
 }
 
